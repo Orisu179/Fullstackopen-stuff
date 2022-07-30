@@ -1,0 +1,10 @@
+title 0.6
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over browser:
+browser sends a POST request
+to new_note_spa containing the content
+and timestamp as JSON-data, everything will be
+processed within the javascript code
+end note
