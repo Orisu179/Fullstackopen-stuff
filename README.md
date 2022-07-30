@@ -1,1 +1,1 @@
-This is for fulstackopen questions
+This is for fullstackopen questions
