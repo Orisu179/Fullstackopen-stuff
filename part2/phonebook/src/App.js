@@ -1,19 +1,27 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Filter from './Filter'
 import Persons from './Persons'
 import PersonForm from './PersonForm'
 
-let counter = 1
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: 1 }
-  ])
+  const [persons, setPersons] = useState([])
+  const [counter, setCounter] = useState(0)
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newInput, setNewInput] = useState('')
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/persons')
+    .then(response => {
+      setPersons(response.data)
+      setCounter(response.data.length)
+    })
+  }, [])
+
   let result = persons
-  if(newInput != '') {
+  if(newInput !== '') {
     result = persons.filter(person =>
       person.name.toLowerCase().includes(newInput.toLowerCase())
     )
