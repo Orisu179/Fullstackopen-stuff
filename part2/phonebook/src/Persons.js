@@ -1,11 +1,21 @@
 import React from 'react'
-import { useState } from 'react'
+import noteService from './services/noteService'
 
-const Persons = ({ result }) => {
+const Persons = ({ result, persons, setPersons }) => {
   return (
     <div>
       {result.map(person =>
-        <p key={person.id}>{person.name} {person.number}</p>
+        <div key={person.id}>
+          <p>{person.name} {person.number}</p>
+          <button type='button' onClick={() => {
+            if(window.confirm(`Delete ${person.name} ?`)){
+              noteService.deleteId(person.id)
+                .then(() => {
+                  setPersons(persons.filter(per => per.id !== person.id))
+                })
+            }
+          }}>delete</button>
+        </div>
       )}
     </div>
   )
